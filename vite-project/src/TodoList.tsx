@@ -16,30 +16,36 @@ export const TodoList: React.FC = () => {
 
   const handleToggle = (id: number) => {
     setTodos(
-        todos.map((todo) => {
-            if (todo.id === id) {
-                return {...todo, completed: !todo.completed};
-            }
-            return todo;
-        })
-    )
+      todos.map((todo) => {
+        if (todo.id === id) {
+          return { ...todo, completed: !todo.completed };
+        }
+        return todo;
+      })
+    );
   };
 
   const handleClick = () => {
-    const newTodo: item = {id: Date.now(), text:input, completed: false};
+    const newTodo: item = { id: Date.now(), text: input, completed: false };
     setTodos([...todos, newTodo]);
     setInput("");
-  }
+  };
 
   return (
     <div className="main-container">
       <h1>Todo List</h1>
       <ul>
         {todos.map((todo) => (
-          <li key={todo.id} onClick={() => handleToggle(todo.id)} style={{textDecoration: todo.completed ? "line-through" : "none"}}>{todo.text}</li>
+          <li
+            key={todo.id}
+            onClick={() => handleToggle(todo.id)}
+            style={{ textDecoration: todo.completed ? "line-through" : "none" }}
+          >
+            {todo.text}
+          </li>
         ))}
       </ul>
-      <input type="text" placeholder="Add todo item" value={input} onChange={(e) => setInput(e.currentTarget.value)}/>
+      <input type="text" placeholder="Add todo item" value={input} onChange={(e) => setInput(e.currentTarget.value)} />
       <button onClick={handleClick}>Add</button>
     </div>
   );
